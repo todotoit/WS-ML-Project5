@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="face-api.js"></script>
+  <script src="faceDetectionControls.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+    <div class="wrapper">
+        <video onloadedmetadata="onReady()" 
+          id="inputVideo" autoplay muted playsinline></video>
+        <canvas id="overlay"></canvas>
+
+        <div class="ball"></div>
+
+        <h1 class="left"></h1>
+        <h1 class="right"></h1>
+    </div>
+
+    <script src="sketch.js"></script>
+  </body>
+
+</html>

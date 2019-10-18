@@ -1,0 +1,105 @@
+*{
+	box-sizing: border-box;
+}
+
+html, body{
+	padding:0;
+	margin: 0;
+	font-family: 'Prompt', sans-serif;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+body{
+	padding: 16px;
+}
+
+#container{
+	width: 100%;
+	height: 100%;
+	display: flex;
+    flex-direction: column;
+}
+
+#field{
+	position: relative;
+	height: 25vh;
+	display: flex;
+	align-items: stretch;
+	align-content: stretch;
+}
+
+#ruler{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-image: url('assets/ruler.svg');
+	background-size: 100vw 25vh;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#field div{
+	flex: 1;
+}
+
+#field #ball{
+	background: url('assets/ball.svg') no-repeat bottom left;
+	background-size: 152px; 
+	position: absolute;
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	box-shadow: 0 10px 20px rgba(0,0,0,.4);
+
+	top: 50%;
+	margin-top: -70px;
+	left: 50%;
+	margin-left: -70px;
+
+}
+
+#bottom{
+	display: flex;
+	height: 100%;
+	border-top: solid 16px #FFF;
+}
+
+#bottom > div{
+	flex: 1;
+}
+
+.red{
+	background: #ff4a1d;
+}
+
+.red .expression{
+	background-image: url('assets/face_red.svg')
+}
+
+.blue{
+	background: #004ede;
+}
+
+.blue .expression{
+	background-image: url('assets/face_blue.svg')
+}
+
+.expression{
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	box-shadow: 0 10px 10px rgba(0,0,0,.4);
+	background-size: 152px;
+	background-position: center; 
+	background-repeat: no-repeat;  
+}
+
+#bottom > div#camera{
+	flex: 3.5;
+	background: url('assets/webcam.png');
+	background-size: cover;
+	border-left: solid 16px #FFF;
+	border-right: solid 16px #FFF;
+}

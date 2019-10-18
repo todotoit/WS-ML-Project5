@@ -1,26 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="face-api.js"></script>
-  <script src="faceDetectionControls.js"></script>
+	<title>TUG OF WAR</title>
+	<link href="https://fonts.googleapis.com/css?family=Prompt:900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="tow.css" media="screen" />
+	<script src="face-api.js"></script>
+    <script src="faceDetectionControls.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 
-    <div class="wrapper">
-        <video onloadedmetadata="onReady()" 
-          id="inputVideo" autoplay muted playsinline></video>
-        <canvas id="overlay"></canvas>
+<div id="container">
+	<div id="field">
+		<div id="field_red" class="red">
+			
+		</div>
+		<div id="field_blue" class="blue">
+			
+		</div>
+		<div id="ruler"></div>
+		<div id="ball"></div>
+	</div>
+	<div id="bottom">
+		<div class="red">
+			<div class="expression">
+			</div>
+		</div>
+		<div id="camera">
+			<div class="wrapper">
+		        <video onloadedmetadata="onReady()" 
+		          id="inputVideo" autoplay muted playsinline></video>
+		        <canvas id="overlay"></canvas>
 
-        <div class="ball"></div>
+		        <div class="ball"></div>
 
-        <h1 class="left"></h1>
-        <h1 class="right"></h1>
-    </div>
-
-    <script src="sketch.js"></script>
-  </body>
-
+		        <h1 class="left"></h1>
+		        <h1 class="right"></h1>
+		    </div>
+		</div>
+		<div class="blue">
+			<div class="expression">
+			</div>
+		</div>
+	</div>
+</div>
+<script src="sketch.js"></script>
+</body>
 </html>
