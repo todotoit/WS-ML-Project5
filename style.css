@@ -1,0 +1,28 @@
+body{
+    margin:0;
+    padding:0;
+    overflow: hidden;
+}
+
+.ball{
+    position:absolute;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    top:150px;
+    background-color: red;
+}
+.wrapper{
+    width:100%;
+    position: relative;
+}
+.wrapper canvas, .wrapper video, .wrapper h1{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+}
+
+.right{
+    text-align: right;
+}
