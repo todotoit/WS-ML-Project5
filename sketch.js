@@ -18,7 +18,8 @@ function startGame () {
   x = 290
   steps = 0
   changeExpr()
-  interval = setInterval(changeExpr, 1000 * 10)
+  interval = setInterval(changeExpr, 1000 * 5)
+  document.querySelector('#title').style.display = 'none';
   draw()
 }
 
@@ -29,8 +30,8 @@ function changeExpr () {
   cloned.splice(pickLeft, 1)
   const pickRight = parseInt(Math.random() * cloned.length)
   exprRight = cloned[pickRight]
-  document.querySelector('.left').innerHTML = exprLeft
-  document.querySelector('.right').innerHTML = exprRight
+  document.querySelector('.red .expression img').src = "assets/"+exprLeft+".svg"
+  document.querySelector('.blue .expression img').src = "assets/"+exprRight+".svg"
   steps++
   if (steps > 6) {
     endGame()
@@ -39,8 +40,8 @@ function changeExpr () {
 
 function endGame () {
   console.log('end game')
-  document.querySelector('.left').innerHTML = ''
-  document.querySelector('.right').innerHTML = ''
+  document.querySelector('.red .expression img').src = "assets/none.svg"
+  document.querySelector('.blue .expression img').src = "assets/none.svg"
   clearInterval(interval)
 }
 

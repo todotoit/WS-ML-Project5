@@ -15,6 +15,15 @@ body{
 	padding: 16px;
 }
 
+#title{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.65) url('assets/title@2x.png') no-repeat center 35%;
+	background-size: 80vw;
+	z-index: 2; 
+}
+
 #container{
 	width: 100%;
 	height: 100%;
@@ -24,7 +33,7 @@ body{
 
 #field{
 	position: relative;
-	height: 25vh;
+	height: 28vh;
 	display: flex;
 	align-items: stretch;
 	align-content: stretch;
@@ -35,7 +44,7 @@ body{
 	width: 100%;
 	height: 100%;
 	background-image: url('assets/ruler.svg');
-	background-size: 100vw 25vh;
+	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
 }
@@ -71,7 +80,7 @@ body{
 }
 
 .red{
-	background: #ff4a1d;
+	background: url('assets/pattern.png') #ff4a1d;
 }
 
 .red .expression{
@@ -79,7 +88,7 @@ body{
 }
 
 .blue{
-	background: #004ede;
+	background: url('assets/pattern.png') #004ede;
 }
 
 .blue .expression{
@@ -87,19 +96,19 @@ body{
 }
 
 .expression{
-	width: 140px;
-	height: 140px;
+	margin: 50% auto;
+	width: 160px;
+	height: 160px;
 	border-radius: 50%;
-	box-shadow: 0 10px 10px rgba(0,0,0,.4);
-	background-size: 152px;
+	box-shadow: 0 10px 20px rgba(0,0,0,.4);
+	background-size: 170px;
 	background-position: center; 
 	background-repeat: no-repeat;  
 }
 
 #bottom > div#camera{
 	flex: 3.5;
-	background: url('assets/webcam.png');
-	background-size: cover;
+	background: #FFF;
 	border-left: solid 16px #FFF;
 	border-right: solid 16px #FFF;
 }
