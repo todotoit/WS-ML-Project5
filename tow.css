@@ -153,3 +153,18 @@ body{
 	border-right: solid 16px #FFF;
 	background: #212121;
 }
+
+#timer{
+	position: absolute;
+	height: 50px;
+	border: 16px solid #FFF;
+	top: 20px;
+	left: 2%;
+	width: 96%;
+}
+
+#timer_bar{
+	width: 50%;
+	height: 30px;
+	background: #FFF 
+}
