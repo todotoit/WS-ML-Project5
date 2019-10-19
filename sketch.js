@@ -15,7 +15,7 @@ let steps
 
 function startGame () {
   clearInterval(interval)
-  x = 290
+  x = 290 //center?
   steps = 0
   changeExpr()
   interval = setInterval(changeExpr, 1000 * 5)
@@ -61,7 +61,7 @@ async function draw () {
     result.forEach(f => {
       x -= f.expressions[exprLeft] * FACTOR_MLT
       x += f.expressions[exprRight] * FACTOR_MLT
-      $('.ball').css('left', x + 'px')
+      $('#ball').css('left', x + 'px')
     })
   }
 

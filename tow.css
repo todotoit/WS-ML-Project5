@@ -12,7 +12,7 @@ html, body{
 }
 
 body{
-	padding: 16px;
+
 }
 
 #title{
@@ -21,7 +21,7 @@ body{
 	height: 100%;
 	background: rgba(0,0,0,.65) url('assets/title@2x.png') no-repeat center 35%;
 	background-size: 80vw;
-	z-index: 2; 
+	z-index: 3; 
 }
 
 #container{
@@ -29,6 +29,7 @@ body{
 	height: 100%;
 	display: flex;
     flex-direction: column;
+    padding: 16px;
 }
 
 #field{
@@ -53,30 +54,60 @@ body{
 	flex: 1;
 }
 
-#field #ball{
+#ball{
 	background: url('assets/ball.svg') no-repeat bottom left;
-	background-size: 152px; 
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	box-shadow: 0 10px 20px rgba(0,0,0,.4);
+	background-size: 220px;
+
+	top: 50%;
+	margin-top: -100px;
+	left: 50%;
+	margin-left: -100px;
+
+	transition: all .15s ease-out;
+	z-index: 2;
+}
+
+
+#bottom{
+	display: flex;
+	height: 100%;
+}
+
+#bottom > div{
+	flex: 1;
+	position: relative;
+}
+
+#bottom > div#ball_container{
+	position: absolute;
+	width: 80%;
+	height: 100%;
+	margin: 16px 10%;
+	background: url('assets/ruler2.svg') center center no-repeat;
+	z-index: 2
+}
+
+#ball{
+	background: url('assets/ball.svg') no-repeat bottom left;
 	position: absolute;
 	width: 140px;
 	height: 140px;
 	border-radius: 50%;
-	box-shadow: 0 10px 20px rgba(0,0,0,.4);
+	box-shadow: 0 5px 50px rgba(0,0,0,.6);
+	background-size: 160px;
 
 	top: 50%;
 	margin-top: -70px;
 	left: 50%;
 	margin-left: -70px;
 
-}
-
-#bottom{
-	display: flex;
-	height: 100%;
-	border-top: solid 16px #FFF;
-}
-
-#bottom > div{
-	flex: 1;
+	transition: all .3s ease-out;
+	z-index: 2;
 }
 
 .red{
@@ -84,7 +115,14 @@ body{
 }
 
 .red .expression{
-	background-image: url('assets/face_red.svg')
+	background-image: url('assets/face_red.svg');
+	left: 50%;
+}
+
+.red .expression::after{
+	background: url('assets/arrow_left.svg') center no-repeat;
+	margin-right: -60px;
+	left: -25%;
 }
 
 .blue{
@@ -92,23 +130,46 @@ body{
 }
 
 .blue .expression{
-	background-image: url('assets/face_blue.svg')
+	background-image: url('assets/face_blue.svg');
+	right: 50%;
+}
+
+.blue .expression::after{
+	background: url('assets/arrow_right.svg') center no-repeat;
+	margin-left: 60px;
+	right: -25%;
 }
 
 .expression{
-	margin: 50% auto;
-	width: 160px;
-	height: 160px;
+	position: absolute;
+	margin-top: 100%;
+	width: 180px;
+	height: 180px;
 	border-radius: 50%;
 	box-shadow: 0 10px 20px rgba(0,0,0,.4);
-	background-size: 170px;
+	background-size: 200px;
 	background-position: center; 
 	background-repeat: no-repeat;  
+	z-index: 2;
+	top: 50%;
+    position: absolute;
+    margin-top: -60px;
+}
+
+.expression::after{
+	content:"";
+	display: block;
+	width: 51px;
+	height: 63px;
+	position: absolute;
+	top: 50%;
+	margin-top: -32px;
 }
 
 #bottom > div#camera{
-	flex: 3.5;
+	flex: 10;
 	background: #FFF;
 	border-left: solid 16px #FFF;
 	border-right: solid 16px #FFF;
+	background: #212121;
 }
