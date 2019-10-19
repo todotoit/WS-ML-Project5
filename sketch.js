@@ -20,6 +20,7 @@ const changeStep = 4
 let gamePlay = false
 
 function startGame () {
+  console.log('start Game')
   gamePlay = true
   document.querySelector('#pregame').pause()
   // document.querySelector('#gameplay').play()
@@ -38,6 +39,7 @@ function startGame () {
 }
 
 function changeExpr () {
+  console.log('changeExpr')
   const cloned = JSON.parse(JSON.stringify(expressions))
   const pickLeft = parseInt(Math.random() * cloned.length)
   exprLeft = cloned[pickLeft]
@@ -45,9 +47,10 @@ function changeExpr () {
   const pickRight = parseInt(Math.random() * cloned.length)
   exprRight = cloned[pickRight]
 
+  document.querySelector('.red .expression img').src = 'assets/' + exprLeft + '.svg'
+  document.querySelector('.blue .expression img').src = 'assets/' + exprRight + '.svg'
+
   setTimeout(function () {
-    document.querySelector('.red .expression img').src = 'assets/' + exprLeft + '.svg'
-    document.querySelector('.blue .expression img').src = 'assets/' + exprRight + '.svg'
     document.querySelector('#expression_change').play()
   }, 200)
 
@@ -55,7 +58,6 @@ function changeExpr () {
   TweenMax.to(document.querySelector('.red .expression'), 0.8, { scale: 1, ease: Expo.easeOut, delay: 0.2 })
   TweenMax.to(document.querySelector('.blue .expression'), 0.2, { scale: 1.5, ease: Expo.easeIn })
   TweenMax.to(document.querySelector('.blue .expression'), 0.8, { scale: 1, ease: Expo.easeOut, delay: 0.2 })
-  steps++
 
   TweenMax.to('#timer_bar', 2, { delay: 0.2, width: 100 * (maxSteps - steps) / maxSteps + '%', ease: Elastic.easeOut })
 
@@ -68,11 +70,12 @@ function changeExpr () {
 }
 
 function endGame (won) {
+  console.log('end game')
   gamePlay = false
   document.querySelector('.red .expression img').src = 'assets/none.svg'
   document.querySelector('.blue .expression img').src = 'assets/none.svg'
 
-  TweenMax.to(won + ' .expression', 1, { scale: 1.8, ease: Elastic.easeOut, transformOrigin: 'center' })
+  TweenMax.to(won + ' .expression', 1, { overwrite: true, scale: 1.8, ease: Elastic.easeOut, transformOrigin: 'center' })
 
   clearInterval(interval)
 
