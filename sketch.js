@@ -6,6 +6,8 @@ const expressions = ['happy', 'sad', 'neutral', 'angry', 'surprised']
 const FACTOR_MLT = 1
 let exprLeft = ''
 let exprRight = ''
+const red = '#ff4a1d'
+const blue = '#004ede'
 
 let videoEl = null
 const canvas = document.querySelector('#overlay')
@@ -13,7 +15,7 @@ const ctx = canvas.getContext('2d')
 let options
 let interval
 let steps
-const maxSteps = 6
+const maxSteps = 7
 let gamePlay = false
 
 function startGame () {
@@ -54,9 +56,9 @@ function changeExpr () {
   TweenMax.to(document.querySelector('.blue .expression'), 0.8, {scale:1, ease:Expo.easeOut, delay:0.2})
   steps++
 
-  TweenMax.to('#timer_bar', 0.5, { width: maxSteps * 100 + '%' })
+  TweenMax.to('#timer_bar', 2, { delay: 0.2, width: 100 * steps / maxSteps + '%', ease: Elastic.easeOut })
 
-  if (steps > maxSteps) {
+  if (steps >= maxSteps) {
     const won = x > 50 ? '.blue' : '.red'
     endGame(won)
   }
@@ -93,7 +95,21 @@ async function draw () {
     result.forEach((f, i) => {
       x -= f.expressions[exprLeft] * FACTOR_MLT
       x += f.expressions[exprRight] * FACTOR_MLT
-      $('#ball').css('left', x + '%')
+      TweenMax.set('#ball', { left: x + '%' })
+
+      let colorDominant = '#999'
+      let dominantExp = ''
+      let currentMax = 0
+      expressions.forEach(e => {
+        const v = f.expressions[e]
+        if (v > currentMax) {
+          currentMax = v
+          dominantExp = e
+        }
+      })
+      if (dominantExp === exprLeft || dominantExp === exprRight) {
+        colorDominant = dominantExp === exprLeft ? red : blue
+      }
 
       const r = resizedResult[i].detection
       if (r) {
@@ -101,6 +117,7 @@ async function draw () {
         ctx.beginPath()
         const calcX = 640 - (box.x + box.width / 2)
         ctx.arc(calcX, box.y, 15, 0, 2 * Math.PI)
+        ctx.fillStyle = colorDominant
         ctx.fill()
       }
     })
@@ -127,7 +144,6 @@ async function onReady () {
 async function init () {
   await changeFaceDetector(TINY_FACE_DETECTOR)
   await faceapi.loadFaceExpressionModel('/')
-  changeInputSize(224)
 
   const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
   videoEl = document.querySelector('#inputVideo')

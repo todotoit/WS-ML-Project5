@@ -161,7 +161,7 @@ body{
 }
 
 #timer_bar{
-	width: 50%;
 	height: 16px;
+	width: 0%;
 	background: #FFF 
 }
