@@ -86,7 +86,7 @@ body{
 	left: 50%;
 	margin-left: -80px;
 
-	transition: all .3s ease-out;
+	/*transition: all .3s ease-out;*/
 	z-index: 2;
 }
 

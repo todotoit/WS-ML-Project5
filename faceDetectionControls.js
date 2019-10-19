@@ -8,7 +8,7 @@ let selectedFaceDetector = SSD_MOBILENETV1
 const minConfidence = 0.5
 
 // tiny_face_detector options
-const inputSize = 512
+const inputSize = 224
 const scoreThreshold = 0.5
 
 // mtcnn options

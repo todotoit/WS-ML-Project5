@@ -19,18 +19,13 @@ const maxSteps = 7
 const changeStep = 4
 let gamePlay = false
 
-function preStart () {
-  TweenMax.to('#title', 0.2, { opacity: 0, ease: Expo.easeOut, transformOrigin: 'center' })
-  document.querySelector('#title_sound').pause()
-  document.querySelector('#gameplay').play()
-  document.querySelector('#crowd').play()
-  setTimeout(startGame, 1000)
-}
-
 function startGame () {
   console.log('start Game')
   gamePlay = true
-
+  document.querySelector('#title_sound').pause()
+  document.querySelector('#gameplay').play()
+  document.querySelector('#gameplay').volume = 0.6;
+  document.querySelector('#crowd').play()
   clearInterval(interval)
   x = 50
   steps = 0
@@ -38,11 +33,11 @@ function startGame () {
   TweenMax.set('#timer_bar', { width: '100%' })
 
   interval = setInterval(changeExpr, 1000 * changeStep)
+  TweenMax.to('#title', 0.2, { opacity: 0, ease: Expo.easeOut, transformOrigin: 'center' })
 
   TweenMax.set('.red .expression', { scale: 1, transformOrigin: 'center' })
   TweenMax.set('.blue .expression', { scale: 1, transformOrigin: 'center' })
-
-  setTimeout(draw, 1000)
+  draw()
 }
 
 function changeExpr () {
@@ -66,7 +61,9 @@ function changeExpr () {
   TweenMax.to(document.querySelector('.blue .expression'), 0.2, { scale: 1.5, ease: Expo.easeIn })
   TweenMax.to(document.querySelector('.blue .expression'), 0.8, { scale: 1, ease: Expo.easeOut, delay: 0.2 })
 
+
   TweenMax.to('#timer_bar', 1, { delay: 0.2, width: 100 * (maxSteps - steps) / maxSteps + '%', ease: Back.easeOut })
+
 
   steps++
 
@@ -89,10 +86,12 @@ function endGame (won) {
 
   clearInterval(interval)
 
-  setTimeout(function () {
+ 
+  setTimeout(function(){
     document.querySelector('#title_sound').play()
-    TweenMax.to('#title', 0.2, { opacity: 1, ease: Expo.easeIn, transformOrigin: 'center' })
-  }, 4.5 * 1000)
+     TweenMax.to('#title', 0.2, { opacity: 1, ease: Expo.easeIn, transformOrigin: 'center' })
+  }, 4.5*1000)
+  
 }
 
 async function draw () {
@@ -171,7 +170,7 @@ init()
 
 document.body.addEventListener('keypress', e => {
   if (e.code === 'Space') {
-    preStart()
+    startGame()
   }
   if (e.code === 'KeyD') debug = !debug
 })
