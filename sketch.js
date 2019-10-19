@@ -19,7 +19,7 @@ let gamePlay = false
 function startGame () {
   gamePlay = true
   document.querySelector('#pregame').pause()
-  document.querySelector('#gameplay').play()
+  //document.querySelector('#gameplay').play()
   clearInterval(interval)
   x = 50
   steps = 0
@@ -39,8 +39,19 @@ function changeExpr () {
   cloned.splice(pickLeft, 1)
   const pickRight = parseInt(Math.random() * cloned.length)
   exprRight = cloned[pickRight]
-  document.querySelector('.red .expression img').src = 'assets/' + exprLeft + '.svg'
-  document.querySelector('.blue .expression img').src = 'assets/' + exprRight + '.svg'
+
+  setTimeout(function(){
+    document.querySelector('.red .expression img').src = 'assets/' + exprLeft + '.svg'
+    document.querySelector('.blue .expression img').src = 'assets/' + exprRight + '.svg'
+    document.querySelector('#expression_change').play()
+    
+  }, 200)
+  
+
+  TweenMax.to(document.querySelector('.red .expression'), 0.2, {scale:1.5, ease:Expo.easeIn})
+  TweenMax.to(document.querySelector('.red .expression'), 0.8, {scale:1, ease:Expo.easeOut, delay:0.2})
+  TweenMax.to(document.querySelector('.blue .expression'), 0.2, {scale:1.5, ease:Expo.easeIn})
+  TweenMax.to(document.querySelector('.blue .expression'), 0.8, {scale:1, ease:Expo.easeOut, delay:0.2})
   steps++
 
   TweenMax.to('#timer_bar', 0.5, { width: maxSteps * 100 + '%' })
