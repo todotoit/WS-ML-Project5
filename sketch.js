@@ -12,8 +12,10 @@ const canvas = document.querySelector('#overlay')
 let options
 let interval
 let steps
+let gamePlay = false
 
 function startGame () {
+  gamePlay = true
   clearInterval(interval)
   x = 50
   steps = 0
@@ -43,6 +45,7 @@ function changeExpr () {
 }
 
 function endGame (won) {
+  gamePlay = false
   console.log('end game')
   document.querySelector('.red .expression img').src = 'assets/none.svg'
   document.querySelector('.blue .expression img').src = 'assets/none.svg'
@@ -72,7 +75,7 @@ async function draw () {
     })
   }
 
-  if (x > 0 && x < 100) {
+  if (gamePlay) {
     setTimeout(() => draw())
   } else {
     if (x < 0) {
