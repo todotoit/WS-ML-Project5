@@ -1,9 +1,9 @@
 const debug = true
 
-let x = -100
+let x = 50
 
 const expressions = ['happy', 'sad', 'neutral', 'angry', 'surprised']
-const FACTOR_MLT = 3
+const FACTOR_MLT = 1
 let exprLeft = ''
 let exprRight = ''
 
@@ -15,11 +15,14 @@ let steps
 
 function startGame () {
   clearInterval(interval)
-  x = 290 //center?
+  x = 50
   steps = 0
   changeExpr()
-  interval = setInterval(changeExpr, 1000 * 5)
-  document.querySelector('#title').style.display = 'none';
+  interval = setInterval(changeExpr, 1000 * 4)
+  document.querySelector('#title').style.display = 'none'
+
+  TweenMax.set('.red .expression', { scale: 1, transformOrigin: 'center' })
+  TweenMax.set('.blue .expression', { scale: 1, transformOrigin: 'center' })
   draw()
 }
 
@@ -30,18 +33,22 @@ function changeExpr () {
   cloned.splice(pickLeft, 1)
   const pickRight = parseInt(Math.random() * cloned.length)
   exprRight = cloned[pickRight]
-  document.querySelector('.red .expression img').src = "assets/"+exprLeft+".svg"
-  document.querySelector('.blue .expression img').src = "assets/"+exprRight+".svg"
+  document.querySelector('.red .expression img').src = 'assets/' + exprLeft + '.svg'
+  document.querySelector('.blue .expression img').src = 'assets/' + exprRight + '.svg'
   steps++
   if (steps > 6) {
-    endGame()
+    const won = x > 50 ? '.blue' : '.red'
+    endGame(won)
   }
 }
 
-function endGame () {
+function endGame (won) {
   console.log('end game')
-  document.querySelector('.red .expression img').src = "assets/none.svg"
-  document.querySelector('.blue .expression img').src = "assets/none.svg"
+  document.querySelector('.red .expression img').src = 'assets/none.svg'
+  document.querySelector('.blue .expression img').src = 'assets/none.svg'
+
+  TweenMax.to(won + ' .expression', 1, { scale: 2, ease: Elastic.easeOut, transformOrigin: 'center' })
+
   clearInterval(interval)
 }
 
@@ -61,11 +68,20 @@ async function draw () {
     result.forEach(f => {
       x -= f.expressions[exprLeft] * FACTOR_MLT
       x += f.expressions[exprRight] * FACTOR_MLT
-      $('#ball').css('left', x + 'px')
+      $('#ball').css('left', x + '%')
     })
   }
 
-  setTimeout(() => draw())
+  if (x > 0 && x < 100) {
+    setTimeout(() => draw())
+  } else {
+    if (x < 0) {
+      endGame('.red')
+    }
+    if (x > 100) {
+      endGame('.blue')
+    }
+  }
 }
 
 async function onReady () {
