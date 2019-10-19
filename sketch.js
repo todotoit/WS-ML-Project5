@@ -21,7 +21,7 @@ let gamePlay = false
 function startGame () {
   gamePlay = true
   document.querySelector('#pregame').pause()
-  //document.querySelector('#gameplay').play()
+  document.querySelector('#gameplay').play()
   clearInterval(interval)
   x = 50
   steps = 0
@@ -56,7 +56,7 @@ function changeExpr () {
   TweenMax.to(document.querySelector('.blue .expression'), 0.8, {scale:1, ease:Expo.easeOut, delay:0.2})
   steps++
 
-  TweenMax.to('#timer_bar', 2, { delay: 0.2, width: 100 * steps / maxSteps + '%', ease: Elastic.easeOut })
+  TweenMax.to('#timer_bar', 1, { delay: 0.2, width: 100 * steps / maxSteps + '%', ease: Back.easeOut })
 
   if (steps >= maxSteps) {
     const won = x > 50 ? '.blue' : '.red'
@@ -69,14 +69,18 @@ function endGame (won) {
   console.log('end game')
   document.querySelector('.red .expression img').src = 'assets/none.svg'
   document.querySelector('.blue .expression img').src = 'assets/none.svg'
-
+  document.querySelector('#won').play()
+  document.querySelector('#gameplay').pause()
   TweenMax.to(won + ' .expression', 1, { scale: 1.8, ease: Elastic.easeOut, transformOrigin: 'center' })
 
   clearInterval(interval)
 
-  document.querySelector('#won').play()
-  document.querySelector('#gameplay').pause()
-  document.querySelector('#pregame').play()
+ 
+  setTimeout(function(){
+    document.querySelector('#pregame').play()
+     TweenMax.to('#title', 0.2, { opacity: 1, ease: Expo.easeIn, transformOrigin: 'center' })
+  }, 3*1000)
+  
 }
 
 async function draw () {
