@@ -20,8 +20,9 @@ let gamePlay = false
 
 function startGame () {
   gamePlay = true
-  document.querySelector('#pregame').pause()
+  document.querySelector('#title_sound').pause()
   document.querySelector('#gameplay').play()
+  document.querySelector('#crowd').play()
   clearInterval(interval)
   x = 50
   steps = 0
@@ -71,15 +72,16 @@ function endGame (won) {
   document.querySelector('.blue .expression img').src = 'assets/none.svg'
   document.querySelector('#won').play()
   document.querySelector('#gameplay').pause()
+  document.querySelector('#crowd').pause()
   TweenMax.to(won + ' .expression', 1, { scale: 1.8, ease: Elastic.easeOut, transformOrigin: 'center' })
 
   clearInterval(interval)
 
  
   setTimeout(function(){
-    document.querySelector('#pregame').play()
+    document.querySelector('#title_sound').play()
      TweenMax.to('#title', 0.2, { opacity: 1, ease: Expo.easeIn, transformOrigin: 'center' })
-  }, 3*1000)
+  }, 4.5*1000)
   
 }
 
@@ -153,7 +155,7 @@ async function init () {
   videoEl = document.querySelector('#inputVideo')
   videoEl.srcObject = stream
 
-  document.querySelector('#pregame').play()
+  document.querySelector('#title_sound').play()
 }
 
 init()
