@@ -1,4 +1,4 @@
-const debug = true
+let debug = false
 
 let x = 50
 
@@ -9,6 +9,7 @@ let exprRight = ''
 
 let videoEl = null
 const canvas = document.querySelector('#overlay')
+const ctx = canvas.getContext('2d')
 let options
 let interval
 let steps
@@ -68,10 +69,19 @@ async function draw () {
       faceapi.draw.drawFaceExpressions(canvas, resizedResult, minConfidence)
     }
 
-    result.forEach(f => {
+    result.forEach((f, i) => {
       x -= f.expressions[exprLeft] * FACTOR_MLT
       x += f.expressions[exprRight] * FACTOR_MLT
       $('#ball').css('left', x + '%')
+
+      const r = resizedResult[i].detection
+      if (r) {
+        const box = r.box
+        ctx.beginPath()
+        const calcX = 640 - (box.x + box.width / 2)
+        ctx.arc(calcX, box.y, 15, 0, 2 * Math.PI)
+        ctx.fill()
+      }
     })
   }
 
@@ -109,4 +119,5 @@ document.body.addEventListener('keypress', e => {
   if (e.code === 'Space') {
     startGame()
   }
+  if (e.code === 'KeyD') debug = !debug
 })
