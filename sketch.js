@@ -13,16 +13,19 @@ const ctx = canvas.getContext('2d')
 let options
 let interval
 let steps
+const maxSteps = 6
 let gamePlay = false
 
 function startGame () {
   gamePlay = true
+  document.querySelector('#pregame').pause()
+  document.querySelector('#gameplay').play()
   clearInterval(interval)
   x = 50
   steps = 0
   changeExpr()
   interval = setInterval(changeExpr, 1000 * 4)
-  TweenMax.to("#title", .2, { opacity: 0, ease: Expo.easeOut, transformOrigin: 'center' })
+  TweenMax.to('#title', 0.2, { opacity: 0, ease: Expo.easeOut, transformOrigin: 'center' })
 
   TweenMax.set('.red .expression', { scale: 1, transformOrigin: 'center' })
   TweenMax.set('.blue .expression', { scale: 1, transformOrigin: 'center' })
@@ -39,7 +42,10 @@ function changeExpr () {
   document.querySelector('.red .expression img').src = 'assets/' + exprLeft + '.svg'
   document.querySelector('.blue .expression img').src = 'assets/' + exprRight + '.svg'
   steps++
-  if (steps > 6) {
+
+  TweenMax.to('#timer_bar', 0.5, { width: maxSteps * 100 + '%' })
+
+  if (steps > maxSteps) {
     const won = x > 50 ? '.blue' : '.red'
     endGame(won)
   }
@@ -54,6 +60,10 @@ function endGame (won) {
   TweenMax.to(won + ' .expression', 1, { scale: 1.8, ease: Elastic.easeOut, transformOrigin: 'center' })
 
   clearInterval(interval)
+
+  document.querySelector('#won').play()
+  document.querySelector('#gameplay').pause()
+  document.querySelector('#pregame').play()
 }
 
 async function draw () {
@@ -111,6 +121,8 @@ async function init () {
   const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
   videoEl = document.querySelector('#inputVideo')
   videoEl.srcObject = stream
+
+  document.querySelector('#pregame').play()
 }
 
 init()
