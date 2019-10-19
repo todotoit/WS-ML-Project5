@@ -76,15 +76,15 @@ body{
 
 #ball{
 	background: url('assets/center.svg') no-repeat bottom left;
-	background-size: 200px; 
+	background-size: 180px; 
 	position: absolute;
-	width: 200px;
-	height: 200px;
+	width: 180px;
+	height: 180px;
 
 	top: 50%;
-	margin-top: -100px;
+	margin-top: -90px;
 	left: 50%;
-	margin-left: -100px;
+	margin-left: -90px;
 
 	transition: all .3s ease-out;
 	z-index: 2;
