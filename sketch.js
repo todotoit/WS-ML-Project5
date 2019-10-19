@@ -19,7 +19,7 @@ function startGame () {
   steps = 0
   changeExpr()
   interval = setInterval(changeExpr, 1000 * 4)
-  document.querySelector('#title').style.display = 'none'
+  TweenMax.to("#title", .2, { opacity: 0, ease: Expo.easeOut, transformOrigin: 'center' })
 
   TweenMax.set('.red .expression', { scale: 1, transformOrigin: 'center' })
   TweenMax.set('.blue .expression', { scale: 1, transformOrigin: 'center' })
@@ -47,7 +47,7 @@ function endGame (won) {
   document.querySelector('.red .expression img').src = 'assets/none.svg'
   document.querySelector('.blue .expression img').src = 'assets/none.svg'
 
-  TweenMax.to(won + ' .expression', 1, { scale: 2, ease: Elastic.easeOut, transformOrigin: 'center' })
+  TweenMax.to(won + ' .expression', 1, { scale: 1.8, ease: Elastic.easeOut, transformOrigin: 'center' })
 
   clearInterval(interval)
 }
