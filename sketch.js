@@ -61,6 +61,7 @@ function endGame (won) {
 
   clearInterval(interval)
 
+  document.querySelector('#won').play()
   document.querySelector('#gameplay').pause()
   document.querySelector('#pregame').play()
 }
