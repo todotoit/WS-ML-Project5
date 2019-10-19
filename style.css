@@ -17,6 +17,10 @@
     width:100%;
 }
 
+.wrapper video{
+    transform: scaleX(-1);
+}
+
 .right{
     text-align: right;
 }
